@@ -20,6 +20,7 @@ public class ParametrizedTest {
                 Arguments.of("Форель", "Форель – рыба семейства лососевых")
         );
     }
+
     @ParameterizedTest(name = "Ищем рыбку: {0}")
     @MethodSource("commonFishSearchTestDataProvider")
     void commonFishSearchTest(String testData, String expectedResult) {
@@ -35,6 +36,7 @@ public class ParametrizedTest {
             "Морковь, Морковь очень полезна",
             "Бананы, Бананы рекомендуются для диетического питания"
     })
+
     void commonFruitsSearchTest(String testData, String expectedResult) {
 
         open("https://vkusvill.ru/");

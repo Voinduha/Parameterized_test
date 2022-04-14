@@ -1,5 +1,7 @@
 package ru.ya.danvu;
 
+import com.codeborne.selenide.Configuration;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -14,6 +16,14 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class ParametrizedTest {
 
+    @BeforeAll
+    static void setUp() {
+
+        Configuration.holdBrowserOpen = true;
+        Configuration.baseUrl = "https://vkusvill.ru/";
+        Configuration.browserSize = "1920x1080";
+    }
+
     static Stream<Arguments> commonFishSearchTestDataProvider() {
         return Stream.of(
                 Arguments.of("Семга", "О своем продукте мы всегда напишем вкусно"),
@@ -25,7 +35,7 @@ public class ParametrizedTest {
     @MethodSource("commonFishSearchTestDataProvider")
     void commonFishSearchTest(String testData, String expectedResult) {
 
-        open("https://vkusvill.ru/");
+        open("");
         $("input[name='q']").val(testData);
         $(".HeaderSearchBlockProd__Layer").click();
         $(".Product__descText").shouldHave(text(expectedResult));
@@ -39,7 +49,7 @@ public class ParametrizedTest {
 
     void commonFruitsSearchTest(String testData, String expectedResult) {
 
-        open("https://vkusvill.ru/");
+        open("");
         $("input[name='q']").val(testData);
         $(".HeaderSearchBlockProd__Layer").click();
         $(".Product__descText").shouldHave(text(expectedResult));
@@ -51,7 +61,7 @@ public class ParametrizedTest {
     void commonCheeseSearchTest(String testData) {
         String[] split = testData.split("_");
 
-        open("https://vkusvill.ru/");
+        open("");
         $("input[name='q']").val(split[0]);
         $(".HeaderSearchBlockProd__Layer").click();
         $(".Product__descText").shouldHave(text(split[1]))

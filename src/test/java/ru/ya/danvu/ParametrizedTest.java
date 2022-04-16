@@ -19,7 +19,6 @@ public class ParametrizedTest {
     @BeforeAll
     static void setUp() {
 
-        Configuration.holdBrowserOpen = true;
         Configuration.baseUrl = "https://vkusvill.ru/";
         Configuration.browserSize = "1920x1080";
     }
@@ -27,7 +26,7 @@ public class ParametrizedTest {
     static Stream<Arguments> commonFishSearchTestDataProvider() {
         return Stream.of(
                 Arguments.of("Семга", "О своем продукте мы всегда напишем вкусно"),
-                Arguments.of("Форель", "Форель – рыба семейства лососевых")
+                Arguments.of("Щука", "Щука — диетическая рыба: в ней много легкоусвояемого белка, полезных элементов и практически нет жира")
         );
     }
 
@@ -43,8 +42,8 @@ public class ParametrizedTest {
 
     @ParameterizedTest(name = "Находим нужные фрутки: {0}")
     @CsvSource(value = {
-            "Морковь, Морковь очень полезна",
-            "Бананы, Бананы рекомендуются для диетического питания"
+            "Киви, Киви – хотя и экзотический, но привычный для нас фрукт",
+            "Бананы, Банан настолько популярный и любимый многими фрукт"
     })
 
     void commonFruitsSearchTest(String testData, String expectedResult) {
@@ -57,7 +56,7 @@ public class ParametrizedTest {
 
     @ParameterizedTest(name = "Находим нужный сыр: {0}")
     @ValueSource(strings = {"сыр Российский_«Российский» изготавливается только из натурального " +
-            "пастеризованного коровьего молока", "сыр плавленный_О своем продукте мы всегда напишем вкусно"})
+            "пастеризованного коровьего молока", "сыр пошехонский_У этого сыра кисловатый немного пряный вкус"})
     void commonCheeseSearchTest(String testData) {
         String[] split = testData.split("_");
 

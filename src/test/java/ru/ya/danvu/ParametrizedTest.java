@@ -1,6 +1,8 @@
 package ru.ya.danvu;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -18,7 +20,7 @@ public class ParametrizedTest {
 
     @BeforeAll
     static void setUp() {
-
+        SelenideLogger.addListener("allure", new AllureSelenide());
         Configuration.baseUrl = "https://vkusvill.ru/";
         Configuration.browserSize = "1920x1080";
     }
@@ -26,7 +28,7 @@ public class ParametrizedTest {
     static Stream<Arguments> commonFishSearchTestDataProvider() {
         return Stream.of(
                 Arguments.of("Семга", "О своем продукте мы всегда напишем вкусно"),
-                Arguments.of("Щука", "Щука — диетическая рыба: в ней много легкоусвояемого белка, полезных элементов и практически нет жира")
+                Arguments.of("Щука", "Щука — диетическая рыба: в ней много легкоусвояемого белка, полезных элементов и практически нет 1жира")
         );
     }
 
